@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">StickyHeaderListView</string>
+
+    <string name="smoothlistview_header_hint_normal">Normal</string>
+    <string name="smoothlistview_header_hint_ready">Ready</string>
+    <string name="smoothlistview_header_hint_loading">Loading...</string>
+    <string name="smoothlistview_header_last_time">LastTime：</string>
+    <string name="smoothlistview_footer_hint_normal">FooterNormal</string>
+    <string name="smoothlistview_footer_hint_ready">Ready</string>
+    <string name="china">china</string>
+    <string name="UnitedStates">United States</string>
+    <string name="UnitedKingdom">United Kingdom</string>
+    <string name="Germany">Germany</string>
+    <string name="Spain">Spain</string>
+    <string name="Italy">Italy</string>
+
+</resources>
