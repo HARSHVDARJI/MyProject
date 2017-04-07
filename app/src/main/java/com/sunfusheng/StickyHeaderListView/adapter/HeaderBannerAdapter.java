@@ -44,7 +44,7 @@ public class HeaderBannerAdapter extends PagerAdapter {
         this.ivList.add(image2);
 
         Bitmap bMap3 = BitmapFactory.decodeResource(resource,
-                R.drawable.seo);
+                R.drawable.lang);
         ImageView image3 = new ImageView(mContext);
         image3.setImageBitmap(bMap3);
         this.ivList.add(image3);

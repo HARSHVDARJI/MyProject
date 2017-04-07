@@ -31,7 +31,7 @@ public class ModelUtil {
         List<Integer> adList = new ArrayList<>();
         adList.add(R.drawable.cms);
         adList.add(R.drawable.howto);
-        adList.add(R.drawable.seo);
+        adList.add(R.drawable.lang);
         adList.add(R.drawable.os);
         adList.add(R.drawable.game);
         return adList;

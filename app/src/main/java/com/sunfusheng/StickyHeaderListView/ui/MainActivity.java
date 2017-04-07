@@ -23,8 +23,6 @@ import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.adapter.TravelingAdapter;
 import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
 import com.sunfusheng.StickyHeaderListView.model.FilterData;
-import com.sunfusheng.StickyHeaderListView.model.FilterEntity;
-import com.sunfusheng.StickyHeaderListView.model.FilterTwoEntity;
 import com.sunfusheng.StickyHeaderListView.model.OperationEntity;
 import com.sunfusheng.StickyHeaderListView.model.TravelingEntity;
 import com.sunfusheng.StickyHeaderListView.util.ColorUtil;
@@ -176,20 +174,20 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         headerChannelView.fillView(channelList, smoothListView);
 
         // 设置运营数据
-        headerOperationView = new HeaderOperationView(this);
-        headerOperationView.fillView(operationList, smoothListView);
+//        headerOperationView = new HeaderOperationView(this);
+//        headerOperationView.fillView(operationList, smoothListView);
 
         // 设置分割线
         headerDividerView = new HeaderDividerView(this);
         headerDividerView.fillView("", smoothListView);
 
         // 设置假FilterView数据
-        headerFilterView = new HeaderFilterView(this);
-        headerFilterView.fillView(new Object(), smoothListView);
+//        headerFilterView = new HeaderFilterView(this);
+//        headerFilterView.fillView(new Object(), smoothListView);
 
         // 设置真FilterView数据
-        filterView.setFilterData(mActivity, filterData);
-        filterView.setVisibility(View.GONE);
+//        filterView.setFilterData(mActivity, filterData);
+//        filterView.setVisibility(View.GONE);
 
         // 设置ListView数据
         mAdapter = new TravelingAdapter(this, travelingList);
@@ -208,52 +206,52 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         });
 
         // (假的ListView头部展示的)筛选视图点击
-        headerFilterView.setOnFilterClickListener(new HeaderFilterView.OnFilterClickListener() {
-            @Override
-            public void onFilterClick(int position) {
-                filterPosition = position;
-                isSmooth = true;
-                smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
-            }
-        });
+//        headerFilterView.setOnFilterClickListener(new HeaderFilterView.OnFilterClickListener() {
+//            @Override
+//            public void onFilterClick(int position) {
+//                filterPosition = position;
+//                isSmooth = true;
+//                smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
+//            }
+//        });
 
         // (真正的)筛选视图点击
-        filterView.setOnFilterClickListener(new FilterView.OnFilterClickListener() {
-            @Override
-            public void onFilterClick(int position) {
-                if (isStickyTop) {
-                    filterPosition = position;
-                    filterView.show(position);
-                    if (titleViewHeight - 3 > filterViewTopMargin || filterViewTopMargin > titleViewHeight + 3) {
-                        smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
-                    }
-                }
-            }
-        });
+//        filterView.setOnFilterClickListener(new FilterView.OnFilterClickListener() {
+//            @Override
+//            public void onFilterClick(int position) {
+//                if (isStickyTop) {
+//                    filterPosition = position;
+//                    filterView.show(position);
+//                    if (titleViewHeight - 3 > filterViewTopMargin || filterViewTopMargin > titleViewHeight + 3) {
+//                        smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
+//                    }
+//                }
+//            }
+//        });
 
         // 分类Item点击
-        filterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
-            @Override
-            public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
-                fillAdapter(ModelUtil.getCategoryTravelingData(leftEntity, rightEntity));
-            }
-        });
-
-        // 排序Item点击
-        filterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
-            @Override
-            public void onItemSortClick(FilterEntity entity) {
-                fillAdapter(ModelUtil.getSortTravelingData(entity));
-            }
-        });
-
-        // 筛选Item点击
-        filterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
-            @Override
-            public void onItemFilterClick(FilterEntity entity) {
-                fillAdapter(ModelUtil.getFilterTravelingData(entity));
-            }
-        });
+//        filterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
+//            @Override
+//            public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
+//                fillAdapter(ModelUtil.getCategoryTravelingData(leftEntity, rightEntity));
+//            }
+//        });
+//
+//        // 排序Item点击
+//        filterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
+//            @Override
+//            public void onItemSortClick(FilterEntity entity) {
+//                fillAdapter(ModelUtil.getSortTravelingData(entity));
+//            }
+//        });
+//
+//        // 筛选Item点击
+//        filterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
+//            @Override
+//            public void onItemFilterClick(FilterEntity entity) {
+//                fillAdapter(ModelUtil.getFilterTravelingData(entity));
+//            }
+//        });
 
         smoothListView.setRefreshEnable(true);
         smoothListView.setLoadMoreEnable(true);
