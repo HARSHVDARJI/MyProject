@@ -29,11 +29,8 @@ import com.sunfusheng.StickyHeaderListView.util.ColorUtil;
 import com.sunfusheng.StickyHeaderListView.util.DensityUtil;
 import com.sunfusheng.StickyHeaderListView.util.ModelUtil;
 import com.sunfusheng.StickyHeaderListView.util.StatusBarUtil;
-import com.sunfusheng.StickyHeaderListView.view.FilterView;
 import com.sunfusheng.StickyHeaderListView.view.HeaderBannerView;
 import com.sunfusheng.StickyHeaderListView.view.HeaderChannelView;
-import com.sunfusheng.StickyHeaderListView.view.HeaderDividerView;
-import com.sunfusheng.StickyHeaderListView.view.HeaderFilterView;
 import com.sunfusheng.StickyHeaderListView.view.HeaderOperationView;
 import com.sunfusheng.StickyHeaderListView.view.SmoothListView.SmoothListView;
 
@@ -52,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
 
     @BindView(R.id.listView)
     SmoothListView smoothListView;
-    @BindView(R.id.filterView)
-    FilterView filterView;
     @BindView(R.id.rl_bar)
     RelativeLayout rlBar;
     @BindView(R.id.view_nevbtn_bg)
@@ -79,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     private HeaderBannerView headerBannerView; // 广告视图
     private HeaderChannelView headerChannelView; // 频道视图
     private HeaderOperationView headerOperationView; // 运营视图
-    private HeaderDividerView headerDividerView; // 分割线占位图
-    private HeaderFilterView headerFilterView; // 分类筛选视图
     private FilterData filterData; // 筛选数据
     private TravelingAdapter mAdapter; // 主页数据
 
@@ -90,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     private boolean isStickyTop = false; // 是否吸附在顶部
     private boolean isSmooth = false; // 没有吸附的前提下，是否在滑动
     private int titleViewHeight = 65; // 标题栏的高度
-    private int filterPosition = -1; // 点击FilterView的位置：分类(0)、排序(1)、筛选(2)
 
     private int bannerViewHeight = 180; // 广告视图的高度
     private int bannerViewTopMargin; // 广告视图距离顶部的距离
@@ -117,11 +109,11 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     }
 
     private void customnavigationdrawer() {
-        menu = new String[]{"Home","Android","Windows","Linux","Raspberry Pi","WordPress","Videos","Contact Us"};
+        menu =  ModelUtil.getMenudata();
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
 
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,menu);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, menu);
 
         header = (LinearLayout) findViewById(R.id.nev_header);
 
@@ -158,8 +150,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         bannerList = ModelUtil.getBannerData();
         // 频道数据
         channelList = ModelUtil.getChannelData();
-        // 运营数据
-        operationList = ModelUtil.getOperationData();
         // ListView数据
         travelingList = ModelUtil.getTravelingData();
     }
@@ -174,20 +164,8 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         headerChannelView.fillView(channelList, smoothListView);
 
         // 设置运营数据
-//        headerOperationView = new HeaderOperationView(this);
-//        headerOperationView.fillView(operationList, smoothListView);
-
-        // 设置分割线
-        headerDividerView = new HeaderDividerView(this);
-        headerDividerView.fillView("", smoothListView);
-
-        // 设置假FilterView数据
-//        headerFilterView = new HeaderFilterView(this);
-//        headerFilterView.fillView(new Object(), smoothListView);
-
-        // 设置真FilterView数据
-//        filterView.setFilterData(mActivity, filterData);
-//        filterView.setVisibility(View.GONE);
+        headerOperationView = new HeaderOperationView(this);
+        headerOperationView.fillView(operationList, smoothListView);
 
         // 设置ListView数据
         mAdapter = new TravelingAdapter(this, travelingList);
@@ -204,54 +182,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
                 startActivity(new Intent(mActivity, AboutActivity.class));
             }
         });
-
-        // (假的ListView头部展示的)筛选视图点击
-//        headerFilterView.setOnFilterClickListener(new HeaderFilterView.OnFilterClickListener() {
-//            @Override
-//            public void onFilterClick(int position) {
-//                filterPosition = position;
-//                isSmooth = true;
-//                smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
-//            }
-//        });
-
-        // (真正的)筛选视图点击
-//        filterView.setOnFilterClickListener(new FilterView.OnFilterClickListener() {
-//            @Override
-//            public void onFilterClick(int position) {
-//                if (isStickyTop) {
-//                    filterPosition = position;
-//                    filterView.show(position);
-//                    if (titleViewHeight - 3 > filterViewTopMargin || filterViewTopMargin > titleViewHeight + 3) {
-//                        smoothListView.smoothScrollToPositionFromTop(filterViewPosition, DensityUtil.dip2px(mContext, titleViewHeight));
-//                    }
-//                }
-//            }
-//        });
-
-        // 分类Item点击
-//        filterView.setOnItemCategoryClickListener(new FilterView.OnItemCategoryClickListener() {
-//            @Override
-//            public void onItemCategoryClick(FilterTwoEntity leftEntity, FilterEntity rightEntity) {
-//                fillAdapter(ModelUtil.getCategoryTravelingData(leftEntity, rightEntity));
-//            }
-//        });
-//
-//        // 排序Item点击
-//        filterView.setOnItemSortClickListener(new FilterView.OnItemSortClickListener() {
-//            @Override
-//            public void onItemSortClick(FilterEntity entity) {
-//                fillAdapter(ModelUtil.getSortTravelingData(entity));
-//            }
-//        });
-//
-//        // 筛选Item点击
-//        filterView.setOnItemFilterClickListener(new FilterView.OnItemFilterClickListener() {
-//            @Override
-//            public void onItemFilterClick(FilterEntity entity) {
-//                fillAdapter(ModelUtil.getFilterTravelingData(entity));
-//            }
-//        });
 
         smoothListView.setRefreshEnable(true);
         smoothListView.setLoadMoreEnable(true);
@@ -286,18 +216,10 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
                     filterViewTopMargin = DensityUtil.px2dip(mContext, itemHeaderFilterView.getTop());
                 }
 
-                // 处理筛选是否吸附在顶部
-                if (filterViewTopMargin <= titleViewHeight || firstVisibleItem > filterViewPosition) {
-                    isStickyTop = true; // 吸附在顶部
-                    filterView.setVisibility(View.VISIBLE);
-                } else {
-                    isStickyTop = false; // 没有吸附在顶部
-                    filterView.setVisibility(View.GONE);
-                }
-
+                // 没有吸附在顶部
+                isStickyTop = filterViewTopMargin <= titleViewHeight || firstVisibleItem > filterViewPosition;
                 if (isSmooth && isStickyTop) {
                     isSmooth = false;
-                    filterView.show(filterPosition);
                 }
 
                 // 处理标题栏颜色渐变
@@ -306,17 +228,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         });
     }
 
-    // 填充数据
-    private void fillAdapter(List<TravelingEntity> list) {
-        if (list == null || list.size() == 0) {
-            smoothListView.setLoadMoreEnable(false);
-            int height = mScreenHeight - DensityUtil.dip2px(mContext, 95); // 95 = 标题栏高度 ＋ FilterView的高度
-            mAdapter.setData(ModelUtil.getNoDataEntity(height));
-        } else {
-            smoothListView.setLoadMoreEnable(list.size() > TravelingAdapter.ONE_REQUEST_COUNT);
-            mAdapter.setData(list);
-        }
-    }
 
     // 处理标题栏颜色渐变
     private void handleTitleBarColorEvaluate() {
@@ -358,14 +269,14 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         headerBannerView.removeBannerLoopMessage();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (!filterView.isShowing()) {
-            super.onBackPressed();
-        } else {
-            filterView.resetAllStatus();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (!filterView.isShowing()) {
+//            super.onBackPressed();
+//        } else {
+//            filterView.resetAllStatus();
+//        }
+//    }
 
     @Override
     public void onRefresh() {

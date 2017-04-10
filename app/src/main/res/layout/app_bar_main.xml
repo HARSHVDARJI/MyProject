@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right">
+
             <com.github.clans.fab.FloatingActionMenu
                 android:id="@+id/fab_menu"
                 android:layout_width="match_parent"
@@ -24,8 +25,8 @@
                 android:layout_alignParentRight="true"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                fab:menu_backgroundColor="#ccffffff"
-                fab:menu_fab_label="Choose an action"
+                fab:menu_backgroundColor="#cc2e28da"
+                fab:menu_fab_label="Add New Post"
                 fab:fab_colorNormal="#DA4336"
                 fab:fab_colorPressed="#E75043"
                 fab:fab_colorRipple="#99FFFFFF"
@@ -45,24 +46,24 @@
                     android:id="@+id/fab1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_edit"
-                    fab:fab_label="Edit an item"
+                    android:src="@android:drawable/ic_menu_search"
+                    fab:fab_label="Search"
                     fab:fab_size="mini" />
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/fab2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_add"
-                    fab:fab_label="Menu item 2"
+                    android:src="@drawable/personadd"
+                    fab:fab_label="Find Friends"
                     fab:fab_size="mini" />
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/fab3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_delete"
-                    fab:fab_label="lorem_ipsum"
+                    android:src="@drawable/groupadd"
+                    fab:fab_label="Create Group"
                     fab:fab_size="mini" />
 
             </com.github.clans.fab.FloatingActionMenu>
