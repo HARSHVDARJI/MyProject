@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.adapter.TravelingAdapter;
 import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
@@ -29,6 +31,7 @@ import com.sunfusheng.StickyHeaderListView.util.ColorUtil;
 import com.sunfusheng.StickyHeaderListView.util.DensityUtil;
 import com.sunfusheng.StickyHeaderListView.util.ModelUtil;
 import com.sunfusheng.StickyHeaderListView.util.StatusBarUtil;
+import com.sunfusheng.StickyHeaderListView.util.ToastUtil;
 import com.sunfusheng.StickyHeaderListView.view.HeaderBannerView;
 import com.sunfusheng.StickyHeaderListView.view.HeaderChannelView;
 import com.sunfusheng.StickyHeaderListView.view.HeaderOperationView;
@@ -62,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     @BindView(R.id.nev_btn)
     ImageView nevbtn;
 
+    @BindView(R.id.fab_menu)
+    FloatingActionMenu fam;
+    @BindView(R.id.fab1)
+    FloatingActionButton fabAdd;
+    @BindView(R.id.fab2)
+    FloatingActionButton fabEdit;
+    @BindView(R.id.fab3)
+    FloatingActionButton fabDelete;
+
     private Context mContext;
     private Activity mActivity;
     private int mScreenHeight; // 屏幕高度
@@ -76,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     private HeaderOperationView headerOperationView; // 运营视图
     private FilterData filterData; // 筛选数据
     private TravelingAdapter mAdapter; // 主页数据
-
     private View itemHeaderBannerView; // 从ListView获取的广告子View
     private View itemHeaderFilterView; // 从ListView获取的筛选子View
     private boolean isScrollIdle = true; // ListView是否在滑动
@@ -95,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     LinearLayout header;
     ArrayAdapter<String> adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +118,55 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         initView();
         initListener();
         customnavigationdrawer();
+        floatingActionButton();
     }
+
+    private void floatingActionButton() {
+
+        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+            @Override
+            public void onMenuToggle(boolean opened) {
+                if (opened) {
+                    fam.getMenuIconView().setImageResource(R.mipmap.edit);
+                    ToastUtil.show(mContext, "Menu is opened");
+                } else {
+                    fam.getMenuIconView().setImageResource(R.drawable.fab_add);
+                    ToastUtil.show(mContext, "Menu is closed");
+                }
+            }
+        });
+
+        //handling each floating action button clicked
+        fabDelete.setOnClickListener(onButtonClick());
+        fabEdit.setOnClickListener(onButtonClick());
+        fabAdd.setOnClickListener(onButtonClick());
+
+        fam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fam.isOpened()) {
+                    fam.close(true);
+                }
+            }
+        });
+    }
+
+    View.OnClickListener onButtonClick() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view == fabAdd) {
+                    ToastUtil.show(mContext, "Button Add clicked");
+                } else if (view == fabDelete) {
+                    ToastUtil.show(mContext, "Button Delete clicked");
+                } else {
+                    ToastUtil.show(mContext, "Button Edit clicked");
+                }
+                fam.close(true);
+            }
+        };
+    }
+
 
     private void customnavigationdrawer() {
         menu =  ModelUtil.getMenudata();
