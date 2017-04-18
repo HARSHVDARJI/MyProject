@@ -51,8 +51,9 @@
                     android:text="Username"
                     android:gravity="left"
                     android:paddingLeft="10dp"
-                    android:textColor="@color/font_black_5"
-                    android:textSize="12sp"/>
+                    android:textColor="@drawable/field_selector"
+                    android:textSize="12sp"
+                    android:descendantFocusability="afterDescendants"/>
 
                 <TextView
                     android:id="@+id/tag"
@@ -71,8 +72,9 @@
                     android:text="Tag"
                     android:gravity="left"
                     android:paddingLeft="5dp"
-                    android:textColor="@color/font_black_5"
-                    android:textSize="12sp"/>
+                    android:textColor="@drawable/field_selector"
+                    android:textSize="12sp"
+                    android:descendantFocusability="afterDescendants"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

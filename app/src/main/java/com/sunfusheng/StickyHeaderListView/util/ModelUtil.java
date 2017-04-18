@@ -54,7 +54,7 @@ public class ModelUtil {
 //        return operationList;
 //    }
     static String[] title = new String[]{
-            "This is title 1 for community app",
+            "Keyboard Shortcuts You’ll Ever Need :: GeekSperm",
             "This is title 2 for community app",
             "This is title 3 for community app",
             "This is title 4 for community app",
@@ -67,7 +67,7 @@ public class ModelUtil {
     };
 
     static String[] username = new String[]{
-            "username1",
+            "Harsh Darji",
             "username2",
             "username3",
             "username4",
@@ -79,7 +79,7 @@ public class ModelUtil {
             "username10"
     };
 
-    static String[] tag = new String[]{"os", "lang", "cms","seo", "game",
+    static String[] tag = new String[]{"How to", "lang", "cms","seo", "game",
             "os", "lang", "cms","seo", "game" };
 
     static Integer[] like = new Integer[] {
@@ -161,6 +161,12 @@ public class ModelUtil {
     public static String[] getMenudata() {
         String[] item = new String[]{"My Profile","My Posts","Friends",
                 "Groups","Settings","About Us"};
+        return item;
+    }
+
+    public static String[] getSpinnerdata() {
+        String[] item = new String[]{"-SELECT TAG","CMS","HOW TO",
+                "OS","SEO","LANGUAGES","GAME"};
         return item;
     }
 

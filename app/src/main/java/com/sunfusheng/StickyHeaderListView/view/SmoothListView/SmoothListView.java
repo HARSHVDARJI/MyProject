@@ -1,6 +1,7 @@
 package com.sunfusheng.StickyHeaderListView.view.SmoothListView;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,6 +73,11 @@ public class SmoothListView extends ListView implements OnScrollListener {
     public SmoothListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initWithContext(context);
+    }
+
+    @Override
+    public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
+        super.setOnItemClickListener(listener);
     }
 
     private void initWithContext(Context context) {

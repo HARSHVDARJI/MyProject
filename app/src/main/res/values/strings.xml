@@ -1,12 +1,12 @@
 <resources>
 
-    <string name="app_name">StickyHeaderListView</string>
+    <string name="app_name">GeekApp</string>
 
     <string name="smoothlistview_header_hint_normal">Normal</string>
     <string name="smoothlistview_header_hint_ready">Ready</string>
     <string name="smoothlistview_header_hint_loading">Loading...</string>
     <string name="smoothlistview_header_last_time">LastTime：</string>
-    <string name="smoothlistview_footer_hint_normal">FooterNormal</string>
+    <string name="smoothlistview_footer_hint_normal">No More Data</string>
     <string name="smoothlistview_footer_hint_ready">Ready</string>
     <string name="china">china</string>
     <string name="UnitedStates">United States</string>
@@ -14,5 +14,164 @@
     <string name="Germany">Germany</string>
     <string name="Spain">Spain</string>
     <string name="Italy">Italy</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_fingerprint">One-touch Login</string>
+    <string name="desc_fingerprint">Please place your fingertip on the scanner to verify your identity</string>
+    <string name="note">(Fingerprint sign in makes your app login much faster. Your device should have at least one fingerprint registered in device settings)</string>
+    <string name="title_activity_home">Fingerprint</string>
+    <string name="activity_home_desc">You have successfully logged in with fingerprint authentication</string>
+    <string name="activity_home_note">Close and re-open the app to see the fingerprint auth screen again</string>
+    <string name="title_activity_basic">BasicActivity</string>
+
+    <string name="text_login">No Fingerprint Recognized ?</string>
+    <string name="button_login">Login</string>
+
+    <string name="decs">Shortcuts For Your MAC \n
+
+When it comes to navigating your computer like a pro, nothing speeds you up like knowing the exact keystroke to open a new window or force quit a troublesome app. To wean you off your mouse dependency, here are the most essential PC and Mac keyboard shortcuts needed to rid you of your point-and-click habit once and for all.
+\n
+\nCut, copy, paste, and undo
+\nCommand + X, C, V, or Z, respectively
+\n
+\nOpen a new browser tab
+\nCommand + T. And in Chrome, Command + Shift + T will bring back that tab you closed by accident.
+\n
+\nMinimize open windows
+\nCommand + Option + M
+\n
+\nClear your cache
+\nCommand + Shift + Delete
+\n
+\nSelect all
+\nCommand + A
+\n
+\nFind a specific word or phrase
+\nCommand + F
+\n
+\nJump to the browser bar
+\nCommand + L
+\n
+\nOpen up Spotlight to browse your whole computer
+\nCommand + Space
+\n
+\nClose just your current tab
+\nCommand + W.
+\nShould you need to get rid of some evidence in a hurry.
+\n
+\nOpen your application switcher
+\nCommand + Tab
+\nFrom there, you can navigate with the arrow keys.
+\n
+\nForce quit
+\nCommand + Shift + Option + Esc for three seconds
+\nThis bypasses that annoying dialogue box that asks you if you’re sure every time.
+\n
+\nScreenshot your entire screen
+\nCommand + Shift + 3
+\nNot just a selected area.
+\n
+\nScreenshot a specific application
+\nCommand + Shift + 4 + Space Bar
+\nA camera will appear, and you simply move it to the right window and click.
+\n
+\nEmpty the trash without confirming
+\nCommand + Option + Shift + Delete
+\n
+\nFind typos in your text
+\nCommand + ;
+\n
+\nCreate a new folder
+\nCommand + Shift + N
+\n
+\nCreate a new email in Apple Mail
+\nCommand + Shift + I
+\n
+\nInvert your desktop colors
+\nCommand + Control + Option + 8
+\n
+
+\nShortcuts For Your PC
+\n
+\nCut, copy, paste, and undo
+\nControl + X, C, V and Z, respectively
+\n
+\nQuit your open program
+\nALT + F4
+\n
+\nLock your computer screen
+\nWindows Logo + L
+\n
+\nClose your current window
+\nALT + F4
+\n
+\nSelect All
+\nControl + A
+\n
+\nFind a word or phrase
+\nControl + F
+\n
+\nJump to the browser bar
+\nControl + L
+\n
+\nRedo the last operation
+\nCtrl + Y
+\n
+\nOpen the start menu
+\nControl + Escape
+\n
+\nAlternate between programs
+\nALT + Tab
+\n
+\nOpen up task manager
+\nControl + Shift + Escape
+\n
+\nDelete an item permanently
+\nShift + Delete
+\nAnd bypass sending it to the recycle bin.
+\n
+\nMinimize open windows
+\nWindows Logo + M
+\n
+\nClear applications to reveal the desktop
+\nWindows Logo + D
+\n
+\nOn The Desktop Open Explorer
+\n
+\nCNTRL + N
+\n
+\nSearches your computer for files and programs
+\n
+\nWindows Key + (type application or filename here)
+\n
+\nRotate your screen
+\n
+\nCNTRL + ALT + arrow keys rotates your screen
+\n
+\nPrivate Browsing In Chrome
+\n
+\nCNTRL + SHIFT + N
+\n
+\nPrivate Browsing in Firefox
+\n
+\nCNTRL + SHIFT + P
+\n
+\nCompare two documents side by side
+\nWindows Logo + left arrow or right arrow</string>
+
+    <string name="title_final">Keyboard Shortcuts You’ll Ever Need :: GeekSperm</string>
 
 </resources>

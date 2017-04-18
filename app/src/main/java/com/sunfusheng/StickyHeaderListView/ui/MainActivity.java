@@ -17,24 +17,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.adapter.TravelingAdapter;
 import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
 import com.sunfusheng.StickyHeaderListView.model.FilterData;
-import com.sunfusheng.StickyHeaderListView.model.OperationEntity;
 import com.sunfusheng.StickyHeaderListView.model.TravelingEntity;
 import com.sunfusheng.StickyHeaderListView.util.ColorUtil;
 import com.sunfusheng.StickyHeaderListView.util.DensityUtil;
 import com.sunfusheng.StickyHeaderListView.util.ModelUtil;
 import com.sunfusheng.StickyHeaderListView.util.StatusBarUtil;
-import com.sunfusheng.StickyHeaderListView.util.ToastUtil;
 import com.sunfusheng.StickyHeaderListView.view.HeaderBannerView;
 import com.sunfusheng.StickyHeaderListView.view.HeaderChannelView;
-import com.sunfusheng.StickyHeaderListView.view.HeaderOperationView;
 import com.sunfusheng.StickyHeaderListView.view.SmoothListView.SmoothListView;
 
 import java.util.ArrayList;
@@ -64,15 +59,11 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     DrawerLayout dLayout;
     @BindView(R.id.nev_btn)
     ImageView nevbtn;
+    @BindView(R.id.add_post)
+    ImageView addnewpost;
+    @BindView(R.id.txt_appname)
+    TextView txtappname;
 
-    @BindView(R.id.fab_menu)
-    FloatingActionMenu fam;
-    @BindView(R.id.fab1)
-    FloatingActionButton fabAdd;
-    @BindView(R.id.fab2)
-    FloatingActionButton fabEdit;
-    @BindView(R.id.fab3)
-    FloatingActionButton fabDelete;
 
     private Context mContext;
     private Activity mActivity;
@@ -80,12 +71,10 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
 
     private List<Integer> bannerList = new ArrayList<>(); // 广告数据
     private List<ChannelEntity> channelList = new ArrayList<>(); // 频道数据
-    private List<OperationEntity> operationList = new ArrayList<>(); // 运营数据
     private List<TravelingEntity> travelingList = new ArrayList<>(); // ListView数据
 
     private HeaderBannerView headerBannerView; // 广告视图
-    private HeaderChannelView headerChannelView; // 频道视图
-    private HeaderOperationView headerOperationView; // 运营视图
+    private HeaderChannelView headerChannelView;
     private FilterData filterData; // 筛选数据
     private TravelingAdapter mAdapter; // 主页数据
     private View itemHeaderBannerView; // 从ListView获取的广告子View
@@ -118,53 +107,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         initView();
         initListener();
         customnavigationdrawer();
-        floatingActionButton();
-    }
-
-    private void floatingActionButton() {
-
-        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
-            @Override
-            public void onMenuToggle(boolean opened) {
-                if (opened) {
-                    fam.getMenuIconView().setImageResource(R.mipmap.edit);
-                    ToastUtil.show(mContext, "Menu is opened");
-                } else {
-                    fam.getMenuIconView().setImageResource(R.drawable.fab_add);
-                    ToastUtil.show(mContext, "Menu is closed");
-                }
-            }
-        });
-
-        //handling each floating action button clicked
-        fabDelete.setOnClickListener(onButtonClick());
-        fabEdit.setOnClickListener(onButtonClick());
-        fabAdd.setOnClickListener(onButtonClick());
-
-        fam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fam.isOpened()) {
-                    fam.close(true);
-                }
-            }
-        });
-    }
-
-    View.OnClickListener onButtonClick() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view == fabAdd) {
-                    ToastUtil.show(mContext, "Button Add clicked");
-                } else if (view == fabDelete) {
-                    ToastUtil.show(mContext, "Button Delete clicked");
-                } else {
-                    ToastUtil.show(mContext, "Button Edit clicked");
-                }
-                fam.close(true);
-            }
-        };
     }
 
 
@@ -191,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dLayout.closeDrawers();
-                Toast.makeText(MainActivity.this, ""+ position, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, UserPost.class));
             }
         });
     }
@@ -223,10 +165,6 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         headerChannelView = new HeaderChannelView(this);
         headerChannelView.fillView(channelList, smoothListView);
 
-        // 设置运营数据
-        headerOperationView = new HeaderOperationView(this);
-        headerOperationView.fillView(operationList, smoothListView);
-
         // 设置ListView数据
         mAdapter = new TravelingAdapter(this, travelingList);
         smoothListView.setAdapter(mAdapter);
@@ -236,16 +174,31 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
 
     private void initListener() {
         // 关于
-        flActionMore.setOnClickListener(new View.OnClickListener() {
+//        flActionMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(mActivity, AboutActivity.class));
+//            }
+//        });
+
+
+        addnewpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity, AboutActivity.class));
+                startActivity(new Intent(mActivity, NewPost.class));
             }
         });
 
         smoothListView.setRefreshEnable(true);
         smoothListView.setLoadMoreEnable(true);
         smoothListView.setSmoothListViewListener(this);
+        smoothListView.setItemsCanFocus(true);
+        smoothListView.setOnItemClickListener(new SmoothListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(MainActivity.this, UserPost.class));
+            }
+        });
         smoothListView.setOnScrollListener(new SmoothListView.OnSmoothScrollListener() {
             @Override
             public void onSmoothScrolling(View view) {}
@@ -296,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
             fraction = 1f - bannerViewTopMargin * 1f / 60;
             if (fraction < 0f) fraction = 0f;
             rlBar.setAlpha(fraction);
+            txtappname.setAlpha(fraction);
             return ;
         }
 
@@ -304,16 +258,21 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         if (fraction < 0f) fraction = 0f;
         if (fraction > 1f) fraction = 1f;
         rlBar.setAlpha(1f);
+        txtappname.setAlpha(1f);
 
         if (fraction >= 1f || isStickyTop) {
             isStickyTop = true;
             viewNevBg.setAlpha(0f);
             viewActionMoreBg.setAlpha(0f);
             rlBar.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+            txtappname.setTextColor(mContext.getResources().getColor(R.color.white));
         } else {
             viewNevBg.setAlpha(1f - fraction);
             viewActionMoreBg.setAlpha(1f - fraction);
-            rlBar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(mContext, fraction, R.color.transparent, R.color.colorPrimary));
+            rlBar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(mContext, fraction,
+                    R.color.transparent, R.color.colorPrimary));
+            txtappname.setTextColor(ColorUtil.getNewColorByStartEndColor(mContext, fraction,
+                    R.color.transparent, R.color.white));
         }
     }
 

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/iv_placeholder_image"
-        android:text="Uh, no data"
+        android:text="Sorry, no data"
         android:textColor="@color/font_black_5"/>
 
 </RelativeLayout>

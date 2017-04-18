@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -23,15 +24,42 @@
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.AboutActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+        android:name=".ui.NewPost"
+        android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.UserPost" />
+
+        <activity
+            android:name=".ui.MainStartActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.Animation" />
+        <activity
+            android:name=".ui.Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ui.Signup"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity android:name=".ui.FinagerprintActvity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity android:name=".ui.PostFinal"
+            android:theme="@style/Customtheme" />
+
+        <activity android:name=".ui.ProfileFinal"
+            android:theme="@style/Customtheme" />
     </application>
 
 </manifest>

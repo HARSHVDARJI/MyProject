@@ -2,14 +2,20 @@ package com.sunfusheng.StickyHeaderListView.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.model.TravelingEntity;
+import com.sunfusheng.StickyHeaderListView.ui.PostFinal;
+import com.sunfusheng.StickyHeaderListView.ui.ProfileFinal;
+import com.sunfusheng.StickyHeaderListView.util.ToastUtil;
 
 import java.util.List;
 
@@ -47,7 +53,7 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         TravelingAdapter.ViewHolder holder = null;
 
@@ -87,7 +93,38 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
 //            holder.gender.setImageResource(R.drawable.female);
 //        }
 //        holder.name.setText(getItem(position).getName());
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, PostFinal.class);
+                mContext.startActivity(i);
+//                ToastUtil.show(mContext, list.get(position).getTitle());
+            }
+        });
+        holder.tvUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext, ProfileFinal.class));
+//                ToastUtil.show(mContext, list.get(position).getUsername());
+            }
+        });
 
+        holder.tvCat_tag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.show(mContext, list.get(position).getTag());
+            }
+        });
+
+        holder.sharebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("Under Maintanince"));
+                mContext.startActivity(Intent.createChooser(sharingIntent, "Share using"));
+            }
+        });
         return convertView;
     }
     static class ViewHolder {
@@ -105,6 +142,8 @@ public class TravelingAdapter extends BaseListAdapter<TravelingEntity> {
         TextView tvLikes;
         @BindView(R.id.num_comments)
         TextView tvComments;
+        @BindView(R.id.sharebtn)
+        Button sharebtn;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
