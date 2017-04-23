@@ -103,7 +103,37 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
             R.drawable.comp, R.drawable.ec, R.drawable.electronics,
             R.drawable.general, R.drawable.mechanical };
 
-    String URL = "http://192.168.1.100:8000/categories/?format=json";//"http://192.168.1.5:8000/categories/?format=json";
+//    String URL = "[\n" +
+//            "\n" +
+//            "    {\n" +
+//            "        \"id\": 1,\n" +
+//            "        \"cat_name\": \"OS\"\n" +
+//            "    },\n" +
+//            "    {\n" +
+//            "        \"id\": 2,\n" +
+//            "        \"cat_name\": \"LANGUAGE\"\n" +
+//            "    },\n" +
+//            "    {\n" +
+//            "        \"id\": 3,\n" +
+//            "        \"cat_name\": \"CMS\"\n" +
+//            "    },\n" +
+//            "    {\n" +
+//            "        \"id\": 4,\n" +
+//            "        \"cat_name\": \"SEO\"\n" +
+//            "    },\n" +
+//            "    {\n" +
+//            "        \"id\": 5,\n" +
+//            "        \"cat_name\": \"GAME\"\n" +
+//            "    },\n" +
+//            "    {\n" +
+//            "        \"id\": 6,\n" +
+//            "        \"cat_name\": \"HOW_TO\"\n" +
+//            "    }\n" +
+//            "\n" +
+//            "]";         response
+    String URL = "http://192.168.1.100:8000/categories/?format=json";
+                //"http://192.168.1.5:8000/categories/?format=json";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
