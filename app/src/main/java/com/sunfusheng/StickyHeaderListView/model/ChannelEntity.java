@@ -1,34 +1,36 @@
 package com.sunfusheng.StickyHeaderListView.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 /**
  * Created by sunfusheng on 16/4/20.
  */
 public class ChannelEntity implements Serializable {
+    String cat_name;
+    int image;
 
-    private String title;
-    private Integer image_url;
-
-
-    public ChannelEntity(String title, Integer image_url) {
-        this.title = title;
-        this.image_url = image_url;
+    public ChannelEntity(String cat_name, int image) {
+        this.cat_name = cat_name;
+        this.image = image;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCat_name() {
+        Log.d("myapp", "catname "+ cat_name);
+        return cat_name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCat_name(String cat_name) {
+        this.cat_name = cat_name;
     }
 
-    public Integer getImage_url() {
-        return image_url;
+    public int getImage() {
+        Log.d("myapp", "image "+ image);
+        return image;
     }
 
-    public void setImage_url(Integer image_url) {
-        this.image_url = image_url;
+    public void setImage(int image) {
+        this.image = image;
     }
 }

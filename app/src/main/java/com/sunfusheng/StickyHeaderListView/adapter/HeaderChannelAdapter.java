@@ -1,6 +1,7 @@
 package com.sunfusheng.StickyHeaderListView.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,9 +20,28 @@ import butterknife.ButterKnife;
  */
 public class HeaderChannelAdapter extends BaseListAdapter<ChannelEntity> {
 
+    private List<ChannelEntity> list;
+
     public HeaderChannelAdapter(Context context, List<ChannelEntity> list) {
         super(context, list);
+        this.list = list;
     }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public ChannelEntity getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -34,11 +54,11 @@ public class HeaderChannelAdapter extends BaseListAdapter<ChannelEntity> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ChannelEntity entity = getItem(position);
+        ChannelEntity entity = list.get(position);
 
-        holder.tvTitle.setText(entity.getTitle());
-        mImageManager.loadCircleImage(entity.getImage_url(), holder.ivImage);
-
+        holder.tvTitle.setText(entity.getCat_name());
+        mImageManager.loadResImage(entity.getImage(), holder.ivImage);
+        Log.d("myapp",""+entity.getCat_name());
         return convertView;
     }
 

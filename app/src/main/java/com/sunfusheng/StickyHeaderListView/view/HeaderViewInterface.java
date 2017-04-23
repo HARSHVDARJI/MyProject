@@ -1,6 +1,7 @@
 package com.sunfusheng.StickyHeaderListView.view;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ListView;
 
@@ -19,13 +20,16 @@ public abstract class HeaderViewInterface<T> {
 
     public boolean fillView(T t, ListView listView) {
         if (t == null) {
+            Log.d("myapp", "view null");
             return false;
         }
         if ((t instanceof List) && ((List) t).size() == 0) {
+            Log.d("myapp", "view 0");
             return false;
         }
         this.mEntity = t;
         getView(t, listView);
+        Log.d("myapp", "view set");
         return true;
     }
 

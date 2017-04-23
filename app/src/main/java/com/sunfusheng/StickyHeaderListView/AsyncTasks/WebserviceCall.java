@@ -1,6 +1,6 @@
 package com.sunfusheng.StickyHeaderListView.AsyncTasks;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -13,17 +13,16 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
-
 /**
  * Created by Dell on 11-01-2017.
  */
 
-public class WebserviceCall extends AsyncTask<Void,Void,String>{
+public class WebserviceCall extends AsyncTask<Void,Void,String> {
     // interface for response
 
     AsyncResponse delegate;
     private final MediaType URLENCODE = MediaType.parse("application/json;charset=utf-8");
-    ProgressDialog dialog;
+//    private ProgressDialog dialog;
     Context context;
     String dialogMessage;
     boolean showDialog = true;
@@ -39,15 +38,14 @@ public class WebserviceCall extends AsyncTask<Void,Void,String>{
         this.delegate = delegate;
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        if(showDialog) {
-            dialog = new ProgressDialog(context);
-            dialog.setMessage(dialogMessage);
-            dialog.show();
-        }
-    }
+//    @Override
+//    protected void onPreExecute() {
+//        super.onPreExecute();
+//        if(showDialog) {
+//            this.dialog.setMessage(dialogMessage);
+//            this.dialog.show();
+//        }
+//    }
 
     /**
      * Web service call okhttp
@@ -78,7 +76,7 @@ public class WebserviceCall extends AsyncTask<Void,Void,String>{
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            Log.d("myapp",res);
+//            Log.d("myapp",res);
             return res;
 
         } catch (IOException e) {
@@ -92,11 +90,6 @@ public class WebserviceCall extends AsyncTask<Void,Void,String>{
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if(showDialog){
-            if(dialog.isShowing()){
-                dialog.dismiss();
-            }
-        }
         if(s != null){
             // set value to AsyncResponse interface for further proccess in activity
             //  Log.d("myapp",getClass().getSimpleName()+" "+s);

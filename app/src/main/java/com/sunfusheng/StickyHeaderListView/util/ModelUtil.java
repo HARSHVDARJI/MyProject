@@ -1,7 +1,8 @@
 package com.sunfusheng.StickyHeaderListView.util;
 
+import android.content.Context;
+
 import com.sunfusheng.StickyHeaderListView.R;
-import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
 import com.sunfusheng.StickyHeaderListView.model.FilterEntity;
 import com.sunfusheng.StickyHeaderListView.model.FilterTwoEntity;
 import com.sunfusheng.StickyHeaderListView.model.TravelingEntity;
@@ -17,6 +18,9 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class ModelUtil {
 
+    public static Context context;
+    public static final String URL = "http://192.168.1.5:8000/categories/";
+
     public static final String type_scenery = "landscape";
     public static final String type_building = "building";
     public static final String type_animal = "animal";
@@ -29,22 +33,23 @@ public class ModelUtil {
         adList.add(R.drawable.howto);
         adList.add(R.drawable.lang);
         adList.add(R.drawable.os);
-        adList.add(R.drawable.game);
+        adList.add(R.drawable.seo);
         return adList;
     }
 
 
     // 频道数据
-    public static List<ChannelEntity> getChannelData() {
-        List<ChannelEntity> channelList = new ArrayList<>();
-        channelList.add(new ChannelEntity("CMS", R.drawable.cms));
-        channelList.add(new ChannelEntity("HOW TO", R.drawable.howto));
-        channelList.add(new ChannelEntity("LANGUAGES", R.drawable.lang));
-        channelList.add(new ChannelEntity("OS", R.drawable.os));
-        channelList.add(new ChannelEntity("SEO", R.drawable.seo));
-        channelList.add(new ChannelEntity("GAMES", R.drawable.game));
-        return channelList;
-    }
+//    public static List<ChannelEntity> getChannelData() {
+//
+//        List<ChannelEntity> channelList = new ArrayList<>();
+//        channelList.add(new ChannelEntity("CMS", R.drawable.cms));
+//        channelList.add(new ChannelEntity("HOW TO", R.drawable.howto));
+//        channelList.add(new ChannelEntity("LANGUAGES", R.drawable.lang));
+//        channelList.add(new ChannelEntity("OS", R.drawable.os));
+//        channelList.add(new ChannelEntity("SEO", R.drawable.seo));
+//        channelList.add(new ChannelEntity("GAMES", R.drawable.game));
+//        return channelList;
+//    }
 
     // 运营数据
 //    public static List<OperationEntity> getOperationData() {

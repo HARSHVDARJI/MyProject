@@ -57,7 +57,7 @@ public class ImageManager {
     }
 
     // 加载网络圆型图片
-    public void loadCircleImage(Integer url, ImageView imageView) {
+    public void loadCircleImage(String url, ImageView imageView) {
         Glide.with(mContext)
                 .load(url)
                 .placeholder(R.mipmap.ic_launcher)

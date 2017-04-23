@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -19,6 +20,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.sunfusheng.StickyHeaderListView.AsyncTasks.AsyncResponse;
+import com.sunfusheng.StickyHeaderListView.AsyncTasks.WebserviceCall;
 import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.adapter.TravelingAdapter;
 import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     private int mScreenHeight; // 屏幕高度
 
     private List<Integer> bannerList = new ArrayList<>(); // 广告数据
-    private List<ChannelEntity> channelList = new ArrayList<>(); // 频道数据
+    private List<ChannelEntity> channelList; //= new ArrayList<>(); // 频道数据
     private List<TravelingEntity> travelingList = new ArrayList<>(); // ListView数据
 
     private HeaderBannerView headerBannerView; // 广告视图
@@ -95,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     LinearLayout header;
     ArrayAdapter<String> adapter;
 
+    int [] cat_img = new int[]{ R.drawable.civil,
+            R.drawable.comp, R.drawable.ec, R.drawable.electronics,
+            R.drawable.general, R.drawable.mechanical };
+
+    String URL = "http://192.168.1.100:8000/categories/?format=json";//"http://192.168.1.5:8000/categories/?format=json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +116,13 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         initView();
         initListener();
         customnavigationdrawer();
+
+        if (headerChannelView == null){
+            Log.d("myapp", "adapter null");
+        }
+        else{
+            Log.d("myapp", "adapter not null");
+        }
     }
 
 
@@ -151,9 +167,25 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         // 广告数据
         bannerList = ModelUtil.getBannerData();
         // 频道数据
-        channelList = ModelUtil.getChannelData();
+//        channelList = ModelUtil.getChannelData();
         // ListView数据
         travelingList = ModelUtil.getTravelingData();
+
+        channelList = new ArrayList<>();
+
+        new WebserviceCall(this, URL, null, "Loading...", true, new AsyncResponse() {
+            @Override
+            public void onCallback(String response) {
+
+                ChannelEntity[] model = new Gson().fromJson(response, ChannelEntity[].class);
+                Log.d("myapp", ""+ model.length);
+                for (int i = 0; i <model.length ; i++) {
+                    ChannelEntity item = new ChannelEntity(model[i].getCat_name(), cat_img[i]);
+                    channelList.add(item);
+//                    Log.d("myapp", ""+ cat_img[i]);
+                }
+            }
+        }).execute();
     }
 
     private void initView() {
@@ -161,6 +193,12 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         headerBannerView = new HeaderBannerView(this);
         headerBannerView.fillView(bannerList, smoothListView);
 
+        if (channelList == null){
+            Log.d("myapp", "null");
+        }
+        else{
+            Log.d("myapp", "not null");
+        }
         // 设置频道数据
         headerChannelView = new HeaderChannelView(this);
         headerChannelView.fillView(channelList, smoothListView);
@@ -171,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
 
         filterViewPosition = smoothListView.getHeaderViewsCount() - 1;
     }
+
 
     private void initListener() {
         // 关于

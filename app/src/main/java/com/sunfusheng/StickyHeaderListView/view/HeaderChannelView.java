@@ -34,6 +34,8 @@ public class HeaderChannelView extends HeaderViewInterface<List<ChannelEntity>> 
 
         dealWithTheView(list);
         listView.addHeaderView(view);
+
+
     }
 
     private void dealWithTheView(final List<ChannelEntity> list) {
@@ -52,10 +54,11 @@ public class HeaderChannelView extends HeaderViewInterface<List<ChannelEntity>> 
         final HeaderChannelAdapter adapter = new HeaderChannelAdapter(mActivity, list);
         gvChannel.setAdapter(adapter);
 
+
         gvChannel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtil.show(mActivity, adapter.getItem(position).getTitle());
+                ToastUtil.show(mActivity, adapter.getItem(position).getCat_name());
             }
         });
     }
