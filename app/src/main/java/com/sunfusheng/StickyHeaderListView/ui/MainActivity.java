@@ -20,9 +20,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.sunfusheng.StickyHeaderListView.AsyncTasks.AsyncResponse;
-import com.sunfusheng.StickyHeaderListView.AsyncTasks.WebserviceCall;
 import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.adapter.TravelingAdapter;
 import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
@@ -77,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     private List<ChannelEntity> channelList; //= new ArrayList<>(); // 频道数据
     private List<TravelingEntity> travelingList = new ArrayList<>(); // ListView数据
 
+    private List<ChannelEntity> channelList1 = new ArrayList<>();
+
     private HeaderBannerView headerBannerView; // 广告视图
     private HeaderChannelView headerChannelView;
     private FilterData filterData; // 筛选数据
@@ -99,9 +98,9 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
     LinearLayout header;
     ArrayAdapter<String> adapter;
 
-    int [] cat_img = new int[]{ R.drawable.civil,
-            R.drawable.comp, R.drawable.ec, R.drawable.electronics,
-            R.drawable.general, R.drawable.mechanical };
+    int[] img = new int[]{R.drawable.os,
+            R.drawable.howto, R.drawable.cms, R.drawable.seo,
+            R.drawable.lang, R.drawable.game};
 
 //    String URL = "[\n" +
 //            "\n" +
@@ -147,12 +146,12 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         initListener();
         customnavigationdrawer();
 
-        if (headerChannelView == null){
-            Log.d("myapp", "adapter null");
-        }
-        else{
-            Log.d("myapp", "adapter not null");
-        }
+//        if (headerChannelView == null){
+//            Log.d("myapp", "adapter null");
+//        }
+//        else{
+//            Log.d("myapp", "adapter not null");
+//        }
     }
 
 
@@ -201,21 +200,26 @@ public class MainActivity extends AppCompatActivity implements SmoothListView.IS
         // ListView数据
         travelingList = ModelUtil.getTravelingData();
 
-        channelList = new ArrayList<>();
-
-        new WebserviceCall(this, URL, null, "Loading...", true, new AsyncResponse() {
-            @Override
-            public void onCallback(String response) {
-
-                ChannelEntity[] model = new Gson().fromJson(response, ChannelEntity[].class);
-                Log.d("myapp", ""+ model.length);
-                for (int i = 0; i <model.length ; i++) {
-                    ChannelEntity item = new ChannelEntity(model[i].getCat_name(), cat_img[i]);
-                    channelList.add(item);
-//                    Log.d("myapp", ""+ cat_img[i]);
-                }
-            }
-        }).execute();
+        Log.d("myapp", "channelList "+travelingList.size());
+        channelList = ModelUtil.getChannelData();
+//
+        Log.d("myapp", "channelList "+channelList.size());
+//        new WebserviceCall(this, URL, null, "Loading...", true, new AsyncResponse() {
+//            @Override
+//            public void onCallback(String response) {
+//
+//                ChannelEntity[] model = new Gson().fromJson(response, ChannelEntity[].class);
+//                Log.d("myapp", ""+ model.length);
+//                for (int i = 0; i <model.length ; i++) {
+//                    ChannelEntity item = new ChannelEntity
+//                            (model[i].getId(), model[i].getCat_name(), cat_img[i]);
+//                    channelList.add(item);
+////                    Log.d("myapp", "for loop "+ channelList.add(item));
+////                    Log.d("myapp", "for loop "+ model[i].getCat_name());
+////                    Log.d("myapp", "for loop "+ cat_img[i]);
+//                }
+//            }
+//        }).execute();
     }
 
     private void initView() {

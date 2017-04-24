@@ -1,8 +1,14 @@
 package com.sunfusheng.StickyHeaderListView.util;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
+import com.google.gson.Gson;
+import com.sunfusheng.StickyHeaderListView.AsyncTasks.AsyncResponse;
+import com.sunfusheng.StickyHeaderListView.AsyncTasks.WebserviceCall;
 import com.sunfusheng.StickyHeaderListView.R;
+import com.sunfusheng.StickyHeaderListView.model.ChannelEntity;
 import com.sunfusheng.StickyHeaderListView.model.FilterEntity;
 import com.sunfusheng.StickyHeaderListView.model.FilterTwoEntity;
 import com.sunfusheng.StickyHeaderListView.model.TravelingEntity;
@@ -18,8 +24,10 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class ModelUtil {
 
+    public static Activity activity;
+
     public static Context context;
-    public static final String URL = "http://192.168.1.5:8000/categories/";
+    public static final String URL = "http://192.168.1.100:8000/categories/?format=json";
 
     public static final String type_scenery = "landscape";
     public static final String type_building = "building";
@@ -37,10 +45,29 @@ public class ModelUtil {
         return adList;
     }
 
+    static int[] img = new int[]{R.drawable.os,
+            R.drawable.howto, R.drawable.cms, R.drawable.seo,
+            R.drawable.lang, R.drawable.game};
 
-    // 频道数据
-//    public static List<ChannelEntity> getChannelData() {
-//
+//     频道数据
+    public static List<ChannelEntity> getChannelData() {
+        final List<ChannelEntity> channelList = new ArrayList<>();
+        new WebserviceCall(activity, URL, null, "Loading...", true, new AsyncResponse() {
+            @Override
+            public void onCallback(String response) {
+
+                ChannelEntity[] model = new Gson().fromJson(response, ChannelEntity[].class);
+                Log.d("myapp", "" + model.length);
+                for (int i = 0; i <model.length; i++) {
+                    ChannelEntity item = new ChannelEntity
+                            (model[i].getId(), model[i].getCat_name(), img[i]);
+                    channelList.add(item);
+                    Log.d("myapp", "for loop " + channelList.add(item));
+                    Log.d("myapp", "for loop " + model[i].getCat_name());
+                    Log.d("myapp", "for loop " + img[i]);
+                }
+            }
+        }).execute();
 //        List<ChannelEntity> channelList = new ArrayList<>();
 //        channelList.add(new ChannelEntity("CMS", R.drawable.cms));
 //        channelList.add(new ChannelEntity("HOW TO", R.drawable.howto));
@@ -48,8 +75,9 @@ public class ModelUtil {
 //        channelList.add(new ChannelEntity("OS", R.drawable.os));
 //        channelList.add(new ChannelEntity("SEO", R.drawable.seo));
 //        channelList.add(new ChannelEntity("GAMES", R.drawable.game));
-//        return channelList;
-//    }
+        Log.d("myapp", "pojo chanal " + channelList.size());
+        return channelList;
+    }
 
     // 运营数据
 //    public static List<OperationEntity> getOperationData() {

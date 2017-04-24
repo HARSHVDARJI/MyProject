@@ -25,20 +25,24 @@ public class HeaderChannelAdapter extends BaseListAdapter<ChannelEntity> {
     public HeaderChannelAdapter(Context context, List<ChannelEntity> list) {
         super(context, list);
         this.list = list;
+        Log.d("myapp", "const");
     }
 
     @Override
     public int getCount() {
+        Log.d("myapp", "count "+list.size());
         return list.size();
     }
 
     @Override
     public ChannelEntity getItem(int position) {
+        Log.d("myapp", "item "+list.get(position));
         return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
+        Log.d("myapp", "item "+position);
         return position;
     }
 
@@ -50,14 +54,21 @@ public class HeaderChannelAdapter extends BaseListAdapter<ChannelEntity> {
             convertView = mInflater.inflate(R.layout.item_channel, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-        } else {
+        } else
+        {
             holder = (ViewHolder) convertView.getTag();
         }
 
         ChannelEntity entity = list.get(position);
-
+        if (entity == null){
+            Log.d("myapp","entity null");
+        } else{
+            Log.d("myapp","entity not null");
+        }
+        assert entity != null;
         holder.tvTitle.setText(entity.getCat_name());
-        mImageManager.loadResImage(entity.getImage(), holder.ivImage);
+//        mImageManager.loadResImage(entity.getImage(), holder.ivImage);
+        holder.ivImage.setImageResource(entity.getImg());
         Log.d("myapp",""+entity.getCat_name());
         return convertView;
     }

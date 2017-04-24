@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.sunfusheng.StickyHeaderListView.R;
 import com.sunfusheng.StickyHeaderListView.view.GlideCircleTransform;
 
@@ -38,11 +39,17 @@ public class ImageManager {
 
     // 加载drawable图片
     public void loadResImage(int resId, ImageView imageView) {
-        Glide.with(mContext)
+//        Glide.with(mContext)
+//                .load(resourceIdToUri(resId))
+//                .placeholder(R.color.font_black_6)
+//                .error(R.color.font_black_6)
+//                .crossFade()
+//                .into(imageView);
+
+        Picasso.with(mContext)
                 .load(resourceIdToUri(resId))
                 .placeholder(R.color.font_black_6)
                 .error(R.color.font_black_6)
-                .crossFade()
                 .into(imageView);
     }
 

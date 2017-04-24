@@ -15,7 +15,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:padding="5dp"
-        android:src="@color/font_black_4"/>
+        android:background="@drawable/general" />
 
     <TextView
         android:id="@+id/tv_title"

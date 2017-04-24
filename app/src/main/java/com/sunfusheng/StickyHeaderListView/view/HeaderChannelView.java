@@ -1,6 +1,7 @@
 package com.sunfusheng.StickyHeaderListView.view;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -39,6 +40,10 @@ public class HeaderChannelView extends HeaderViewInterface<List<ChannelEntity>> 
     }
 
     private void dealWithTheView(final List<ChannelEntity> list) {
+
+        if(list == null){
+            Log.d("myapp", "list null");
+        }
         if (list == null || list.size() < 2) return;
         int size = list.size();
         if (size <= 4) {
@@ -52,6 +57,7 @@ public class HeaderChannelView extends HeaderViewInterface<List<ChannelEntity>> 
         }
 
         final HeaderChannelAdapter adapter = new HeaderChannelAdapter(mActivity, list);
+
         gvChannel.setAdapter(adapter);
 
 
